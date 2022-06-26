@@ -25,12 +25,16 @@ export default async function handler(
   amount = new anchor.BN(amount);
 
   const { VENDOR_SECRET_KEY } = process.env;
-  const secretKeyArray = Buffer.from(VENDOR_SECRET_KEY as string);
+  if (!VENDOR_SECRET_KEY) return;
+
+  const secretKeyArray = Uint8Array.from(JSON.parse(VENDOR_SECRET_KEY));
+  console.log(secretKeyArray);
+
   const vendor = anchor.web3.Keypair.fromSecretKey(secretKeyArray);
   const vendorWallet = new anchor.Wallet(vendor);
 
   const connection = new Connection(
-    "https://api.devnet.solana.com",
+    "http://127.0.0.1:8899 ", // https://explorer-api.devnet.solana.com/
     commitment
   );
   const provider = new anchor.Provider(connection, vendorWallet, {
@@ -54,6 +58,8 @@ export default async function handler(
 
   const program = new anchor.Program(idl as any, programId, provider);
 
+  const randomSeed = new anchor.BN(Math.floor(Math.random() * 100000));
+
   const [coinFlipPDA, _] = await anchor.web3.PublicKey.findProgramAddress(
     [
       anchor.utils.bytes.utf8.encode("coin-flip"),
@@ -63,7 +69,24 @@ export default async function handler(
     program.programId
   );
 
-  const setupTx = await program.rpc.setup(playerPublicKey, amount, {
+  try {
+    // delete if account exists
+    await program.account.coinFlip.fetch(coinFlipPDA); // should error out if account does not exists
+    const deleteTx = await program.rpc.delete(playerPublicKey, {
+      accounts: {
+        coinFlip: coinFlipPDA,
+        vendor: vendor.publicKey,
+        systemProgram: anchor.web3.SystemProgram.programId,
+      },
+      signers: [vendor],
+    });
+
+    await provider.connection.confirmTransaction(deleteTx);
+  } catch (error) {
+    console.log("acoount does not exists, continue");
+  }
+
+  const setupTx = await program.rpc.setup(playerPublicKey, amount, randomSeed, {
     accounts: {
       coinFlip: coinFlipPDA,
       vendor: vendor.publicKey,
@@ -71,7 +94,6 @@ export default async function handler(
     },
     signers: [vendor],
   });
-
   await provider.connection.confirmTransaction(setupTx);
 
   res.status(200).json({
