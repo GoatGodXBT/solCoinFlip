@@ -1,5 +1,3 @@
-
-@@ -0,0 +1,23 @@
 # CoinFlip (Solana)
 
 #### Demo
