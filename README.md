@@ -1,7 +1,7 @@
 # CoinFlip (Solana)
 
 #### Demo
-https://sol-coinflip.vercel.app/
+https://solcoinflip-drab.vercel.app/
 -> Runs in devnet
 
 ### Provable Coin Flip Program on Solana
