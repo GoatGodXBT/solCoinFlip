@@ -4,7 +4,7 @@ import * as anchor from "@project-serum/anchor";
 import * as idl from "../../coin_flip.json";
 import { Connection, PublicKey } from "@solana/web3.js";
 
-const programId = "2WWFGRA4f81ubcjtkh112obV8brzF6nkhBCDGh7Z8hqo";
+const programId = "BKK5xdTQdyYsvvftniqTp4B32kcG3cYSB5peR3T8zUkR";
 import { clusterApiUrl } from "@solana/web3.js";
 
 type Data = {
@@ -83,7 +83,7 @@ export default async function handler(
 
     await provider.connection.confirmTransaction(deleteTx);
   } catch (error) {
-    console.log("acoount does not exists, continue");
+    console.log("account does not exist, continue");
   }
 
   const setupTx = await program.rpc.setup(playerPublicKey, amount, randomSeed, {
