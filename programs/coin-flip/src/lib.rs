@@ -1,8 +1,12 @@
+
 use anchor_lang::prelude::*;
 use num_derive::*;
 use num_traits::*;
+use solana_program::bpf_loader::ID as OtherID;
 
-declare_id!("BKK5xdTQdyYsvvftniqTp4B32kcG3cYSB5peR3T8zUkR");
+
+
+declare_id!("E9FYZrZsxr3ThUdHcCZqJVkKe8ddYCTFHmcvDZCtnqkk");
 
 #[program]
 pub mod coin_flip {
