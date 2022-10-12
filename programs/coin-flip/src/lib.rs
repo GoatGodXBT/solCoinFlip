@@ -1,8 +1,10 @@
+
 use anchor_lang::prelude::*;
 use num_derive::*;
 use num_traits::*;
 
-declare_id!("2WWFGRA4f81ubcjtkh112obV8brzF6nkhBCDGh7Z8hqo");
+
+declare_id!("FmeSDmmUoBmJjDkNJV23YiRP57e1yBJiFDKvbLckNkqE");
 
 #[program]
 pub mod coin_flip {

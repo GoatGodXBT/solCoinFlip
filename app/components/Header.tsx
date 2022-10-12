@@ -14,7 +14,7 @@ const Header: NextPage = () => {
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <a href="#" className="flex items-center">
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              SolCoinFlip
+              
             </span>
           </a>
           <div className="flex md:order-2">

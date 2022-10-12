@@ -1,6 +1,5 @@
 import * as anchor from "@project-serum/anchor";
 import { Program } from "@project-serum/anchor";
-import { CoinFlip } from "../target/types/coin_flip";
 const { SystemProgram, LAMPORTS_PER_SOL } = anchor.web3;
 
 import * as assert from "assert";
