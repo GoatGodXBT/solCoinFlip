@@ -4,8 +4,7 @@ import * as anchor from "@project-serum/anchor";
 import * as idl from "../../coin_flip.json";
 import { Connection, PublicKey } from "@solana/web3.js";
 
-const programId = "E9FYZrZsxr3ThUdHcCZqJVkKe8ddYCTFHmcvDZCtnqkk";
-import { clusterApiUrl } from "@solana/web3.js";
+const programId = "FmeSDmmUoBmJjDkNJV23YiRP57e1yBJiFDKvbLckNkqE";
 
 type Data = {
   coinFlipPDA: string;
